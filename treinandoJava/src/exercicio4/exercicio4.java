@@ -20,11 +20,6 @@ public class exercicio4 {
 		e4.nome = "Da";
 		
 		
-		lista.add(e1);
-		lista.add(e2);
-		lista.add(e3);
-		lista.add(e4);
-		
 		var turma1 = new Turma();
 		turma1.codigo = "T01";
 		turma1.estudantes = new ArrayList<Estudante>();
@@ -34,7 +29,7 @@ public class exercicio4 {
 		turma1.estudantes.add(e4);
 		
 		for (Estudante estudante : turma1.estudantes) {
-			System.out.println(etudante.nome);
+			System.out.println(estudante.nome);
 		}
 		
 		
