@@ -1,11 +1,72 @@
 package exercicio4;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class exercicio4 {
 
 	public static void main(String[] args) {
-		System.out.println("Cadastro de estudante");
+		
+		var e1 = new Estudante();
+		e1.nome = "Lu";
+		
+		var e2 = new Estudante();
+		e2.nome = "Ju";
+		
+		var e3 = new Estudante();
+		e3.nome = "Bi";
+		
+		var e4 = new Estudante();
+		e4.nome = "Da";
+		
+		
+		lista.add(e1);
+		lista.add(e2);
+		lista.add(e3);
+		lista.add(e4);
+		
+		var turma1 = new Turma();
+		turma1.codigo = "T01";
+		turma1.estudantes = new ArrayList<Estudante>();
+		turma1.estudantes.add(e1);
+		turma1.estudantes.add(e2);
+		turma1.estudantes.add(e3);
+		turma1.estudantes.add(e4);
+		
+		for (Estudante estudante : turma1.estudantes) {
+			System.out.println(etudante.nome);
+		}
+		
+		
+		
+		
+		
+		
+		
+	//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		
+		/*
+		var lista = new ArrayList<Integer>();
+		lista.add(10);
+		lista.add(1200);
+		lista.add(999);
+		lista.add(0);
+		lista.add(4);
+		
+		
+		//lista.remove(3);
+		
+		for(int numero : lista) {
+			System.out.println(numero);
+		}
+		*/
+		
+		
+		
+		//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		
+		
+		/*System.out.println("Cadastro de estudante");
 		var leitor = new Scanner(System.in);
 
 		System.out.println("Digite o numero de estudantes que deseja cadastrar");
@@ -36,9 +97,15 @@ public class exercicio4 {
 		for (Estudante e : estudantes) {
 			System.out.println("Nome: " + e.nome);
 			System.out.println("Telefone: " + e.telefone);
-			System.out.println("Endereco: " + e.endereco);
+			System.out.println("Endereco: " + e.endereco);''
 			System.out.println("Responsavel: " + e.responsavel);
 		}
+		
+		 */
+		
+		
+		//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		
 
 		/*
 		 * var estudante1 = new Estudante(); var estudante2 = new Estudante();
