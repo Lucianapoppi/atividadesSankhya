@@ -3,8 +3,6 @@ package desafio2;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import banco.Conta;
-
 public class Principal {
 
 	public static void main(String[] args) {
@@ -96,29 +94,22 @@ public class Principal {
 						
 					}
 				
-				
-				
-				
-				
+								
 
 			} else if (codigo == 4) {
 				System.out.println("Você escolheu listar os estudantes.");
 				
-				
-				
-				
-				
-				
+				for(int i = 0; i<listaEstudantes.size(); i++) {
+					System.out.println("estudantes:  "+ listaEstudantes.get(i).getNome() + ", " + listaEstudantes.get(i).getTelefone() + ", " + listaEstudantes.get(i).getEndereco()+ ", " + listaEstudantes.get(i).getResponsavel());
+					
+				}
 				
 				
 
 			} else if (codigo == 5) {
 				System.out.println("Você escolheu sair.");
 				
-				
-				
-				
-				
+								
 			} else {
 				System.out.println("Opção inválida! Escolha uma opção válida.");
 			}
