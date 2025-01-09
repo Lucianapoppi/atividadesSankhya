@@ -22,17 +22,21 @@ public class TesteErros {
 		System.out.println("Resultado da divisão: " +resultado);
 		System.out.println("Saindo do programa!");
 		
-		}catch(Exception e) {
+		}catch(Exception exception) {
 			System.out.println("Cálculo falhou!");
 			
 		}
+	}
 				
+		
+	private static int calcular(int valor1, int valor2) {
+			System.out.println("Iniciando calculo da divisão");
+			var resultado = dividir(valor1, valor2);
+			System.out.println("Cálculo efetuado");
+			return resultado;
 	}
 	
-
-
-
-
+	
 	private static int dividir(int valor1, int valor2) {
 		System.out.println("Calculando divisão");
 		var resultado = valor1 / valor2;

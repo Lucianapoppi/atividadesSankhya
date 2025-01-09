@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Principal {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
 
@@ -34,48 +34,50 @@ public class Principal {
 		 * 
 		 */
 
-		Scanner leitor = new Scanner(System.in);
-		var opcaoDigitada = 0;
-
-		var estudantes = Path.of("estudantes.csv");
-		if(!Files.exists(estudantes)) {
-			Files.createFile(estudantes);
-		}
-		var turmas = Path.of("turmas.csv");
-		if(!Files.exists(turmas)) {
-			Files.createFile(turmas);
-		}
-
-		boolean continuar = true;
-		while (opcaoDigitada != 5) {
-
-			System.out.println("1 - Cadastrar turma");
-			System.out.println("2 - Cadastrar estudante");
-			System.out.println("3 - Listar turmas");
-			System.out.println("4 - Listar estudantes");
-			System.out.println("5 - sair");
-			System.out.println("Digite o código da opção:");
-
-			opcaoDigitada = Integer.parseInt(leitor.nextLine());
-			if (opcaoDigitada == 1) {
-				cadastrarTurma(leitor, turmas);
-
-			} else if (opcaoDigitada == 2) {
-				cadastrarEstudante(leitor, estudantes);
-
-			} else if (opcaoDigitada == 3) {
-				listarTurmas(turmas);
-
-			} else if (opcaoDigitada == 4) {
-				listarEstudantes(estudantes);
-
-			} else if (opcaoDigitada == 5) {
-				System.out.println("Você escolheu sair.");
-
-			} else {
-				System.out.println("Opção inválida! Por favor, escolha uma opção válida.");
+		
+		try {
+			var turmas = Path.of("turmas.csv");
+			if(!Files.exists(turmas)) {
+				Files.createFile(turmas);
+			}
+			
+			
+			Scanner leitor = new Scanner(System.in);
+			var opcaoDigitada = 0;
+		
+			boolean continuar = true;
+			while (opcaoDigitada != 5) {
+	
+				System.out.println("1 - Cadastrar turma");
+				System.out.println("2 - Cadastrar estudante");
+				System.out.println("3 - Listar turmas");
+				System.out.println("4 - Listar estudantes");
+				System.out.println("5 - sair");
+				System.out.println("Digite o código da opção:");
+	
+				opcaoDigitada = Integer.parseInt(leitor.nextLine());
+				if (opcaoDigitada == 1) {
+					cadastrarTurma(leitor, turmas);
+	
+				} else if (opcaoDigitada == 2) {
+					cadastrarEstudante(leitor);
+	
+				} else if (opcaoDigitada == 3) {
+					listarTurmas(turmas);
+	
+				} else if (opcaoDigitada == 4) {
+					listarEstudantes();
+	
+				} else if (opcaoDigitada == 5) {
+					System.out.println("Você escolheu sair.");
+	
+				} else {
+					System.out.println("Opção inválida! Por favor, escolha uma opção válida.");
+				}
 			}
 
+		}catch (IOException e) {
+			System.out.println("Erro ao carregar o arquivo de turmas ou de estudantes!");
 		}
 	}
 
@@ -101,7 +103,7 @@ public class Principal {
 		
 	}
 
-	private static void	cadastrarEstudante(Scanner leitor, Path arquivo) throws IOException{	
+	private static void	cadastrarEstudante(Scanner leitor) throws IOException{	
 		System.out.println("Você escolheu cadastrar um estudante.");
 		
 		System.out.println("Digite o nome do estudante:");
@@ -118,14 +120,12 @@ public class Principal {
 		
 		var estudante = new Estudante(nomeEstudante, nroTelefone, endEstudante, nomeResponsavel);
 		
-		Files.writeString(
-				arquivo, 
-				estudante.getNome() + "," + estudante.getTelefone() + "," + estudante.getEndereco() + "," + estudante.getResponsavel() +"\n", 
-				 
-				StandardOpenOption.APPEND);
+		var cadastro = new CadastroDeEstudante();
+		cadastro.cadastrar(estudante);
  			
 		}
 
+	
 	private static void listarTurmas(Path arquivo) throws IOException{
 		var linhas = Files.readAllLines(arquivo);
 				
@@ -135,14 +135,17 @@ public class Principal {
 		}
 			
 	}
+	
 
-	private static void listarEstudantes(Path estudantes) throws IOException{
-		var linhas = Files.readAllLines(estudantes);
-		
-		for(var linha : linhas) {
-			var campos = linha.split(",");
-			System.out.println(campos[0] + " - " + campos[1] + " - " + campos[2]+ " - " + campos[3]);
+	private static void listarEstudantes() throws IOException{
+		var cadastro = new CadastroDeEstudante();
+		var estudantesCadastrados = cadastro.listar();
+		for (var estudante:estudantesCadastrados) {
+			System.out.println(estudante.getNome() + " - " +estudante.getTelefone() + " - " +estudante.getEndereco() + " - " +estudante.getResponsavel());
 		}
 
 	}
+	
+	
+	
 }
