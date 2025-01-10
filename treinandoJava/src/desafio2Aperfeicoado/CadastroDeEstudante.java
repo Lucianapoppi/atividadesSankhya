@@ -11,16 +11,19 @@ public class CadastroDeEstudante {
 	
 	public CadastroDeEstudante() {
 		try {
-			var estudantes = Path.of("estudantes.csv");
-			if(!Files.exists(estudantes)) {
-				Files.createFile(estudantes);
+			this.arquivo = Path.of("estudantes.csv");
+			if(!Files.exists(arquivo)) {
+				Files.createFile(arquivo);
 			}
 		}catch(Exception e) {
 			System.out.println("Erro ao criar arquivo de estudantes!");
 		}
 	}
 	
-	public void cadastrar(Estudante estudante) {	
+	public void cadastrar(Estudante estudante) {
+		if(estudante.getNome().isBlank()) {
+			throw new IllegalArgumentException("Campo nome é obrigatório");
+		}
 		try {
 			Files.writeString(
 					arquivo, 

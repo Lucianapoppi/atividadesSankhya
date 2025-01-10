@@ -37,6 +37,7 @@ public class Principal {
 		
 		try {
 			var turmas = Path.of("turmas.csv");
+			System.out.println("criando turma");
 			if(!Files.exists(turmas)) {
 				Files.createFile(turmas);
 			}
@@ -121,7 +122,12 @@ public class Principal {
 		var estudante = new Estudante(nomeEstudante, nroTelefone, endEstudante, nomeResponsavel);
 		
 		var cadastro = new CadastroDeEstudante();
+		
+		try {
 		cadastro.cadastrar(estudante);
+		}catch (IllegalArgumentException e) {
+			System.out.println("Erro ao cadastrar estudante: " +e.getMessage());
+		}
  			
 		}
 
