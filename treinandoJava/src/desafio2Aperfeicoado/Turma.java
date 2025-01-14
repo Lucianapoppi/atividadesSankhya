@@ -1,19 +1,23 @@
 package desafio2Aperfeicoado;
 
+import java.time.LocalDate;
+
 public class Turma {
 
 		private String codigoTurma;
-		private String nomeTurma;
-		private int capacidadeTurma;
+		private Curso curso;
+		private LocalDate dataInicio;
+		private LocalDate dataFim;
 		
 		
-		public Turma(String codigo, String nome, int capacidade) {
+		public Turma(String codigo, Curso curso, LocalDate dataInicio, LocalDate dataFim) {
 			this.codigoTurma = codigo;
-			this.nomeTurma = nome;
-			this.capacidadeTurma = capacidade;
-		}
+			this.curso = curso;
+			this.dataInicio = dataInicio;
+			this.dataFim = dataFim;
 			
-					
+		}
+								
 
 		public String getCodigo() {
 			return codigoTurma;
@@ -25,24 +29,35 @@ public class Turma {
 		}
 
 
-		public String getNome() {
-			return nomeTurma;
+		public Curso getCurso() {
+			return curso;
 		}
 
 
-		public void setNome(String nome) {
-			this.nomeTurma = nome;
+		public void setCurso(Curso curso) {
+			this.curso = curso;
 		}
 
 
-		public int getCapacidade() {
-			return capacidadeTurma;
+		public LocalDate getDataInicio() {
+			return dataInicio;
 		}
 
 
-		public void setCapacidade(int capacidade) {
-			this.capacidadeTurma = capacidade;
+		public void setDataInicio(LocalDate dataInicio) {
+			this.dataInicio = dataInicio;
 		}
+
+
+		public LocalDate getDataFim() {
+			return dataFim;
+		}
+
+
+		public void setDataFim(LocalDate dataFim) {
+			this.dataFim = dataFim;
+		}
+
 }
 
 	

@@ -34,124 +34,123 @@ public class Principal {
 		 * 
 		 */
 
-		
 		try {
 			var turmas = Path.of("turmas.csv");
 			System.out.println("criando turma");
-			if(!Files.exists(turmas)) {
+			if (!Files.exists(turmas)) {
 				Files.createFile(turmas);
 			}
-			
-			
+
 			Scanner leitor = new Scanner(System.in);
 			var opcaoDigitada = 0;
-		
+
 			boolean continuar = true;
 			while (opcaoDigitada != 5) {
-	
+
 				System.out.println("1 - Cadastrar turma");
 				System.out.println("2 - Cadastrar estudante");
 				System.out.println("3 - Listar turmas");
 				System.out.println("4 - Listar estudantes");
 				System.out.println("5 - sair");
 				System.out.println("Digite o código da opção:");
-	
+
 				opcaoDigitada = Integer.parseInt(leitor.nextLine());
 				if (opcaoDigitada == 1) {
 					cadastrarTurma(leitor, turmas);
-	
+
 				} else if (opcaoDigitada == 2) {
 					cadastrarEstudante(leitor);
-	
+
 				} else if (opcaoDigitada == 3) {
 					listarTurmas(turmas);
-	
+
 				} else if (opcaoDigitada == 4) {
 					listarEstudantes();
-	
+
 				} else if (opcaoDigitada == 5) {
 					System.out.println("Você escolheu sair.");
-	
+
 				} else {
 					System.out.println("Opção inválida! Por favor, escolha uma opção válida.");
 				}
 			}
 
-		}catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("Erro ao carregar o arquivo de turmas ou de estudantes!");
 		}
 	}
 
 	private static void cadastrarTurma(Scanner leitor, Path arquivo) throws IOException {
-		
+
 		System.out.println("Você escolheu cadastrar uma turma.");
 
 		System.out.println("Digite o codigo da turma:");
 		var codigoTurma = leitor.nextLine();
 
-		System.out.println("Digite o nome da turma:");
-		var nomeTurma = leitor.nextLine();
+		System.out.println("Digite o curso:");
+		var curso = leitor.nextLine();
 
-		System.out.println("Digite a capacidade da turma:");
-		var capacidadeTurma = Integer.parseInt(leitor.nextLine());
-
-		var turma = new Turma(codigoTurma, nomeTurma, capacidadeTurma);
-
-		Files.writeString(
-				arquivo, 
-				turma.getCodigo() + "," + turma.getNome() + "," + turma.getCapacidade() +"\n",
-				StandardOpenOption.APPEND);
 		
+		var turma = new Turma(codigoTurma, curso);
+
+		var cadastro = new CadastroDeTurma();
+
+		try {
+			cadastro.cadastrar(turma);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Erro ao cadastrar turma: " + e.getMessage());
+		}
+
 	}
 
-	private static void	cadastrarEstudante(Scanner leitor) throws IOException{	
+	private static void cadastrarEstudante(Scanner leitor) throws IOException {
 		System.out.println("Você escolheu cadastrar um estudante.");
-		
+
 		System.out.println("Digite o nome do estudante:");
 		String nomeEstudante = leitor.nextLine();
-		
+
 		System.out.println("Digite o numero do seu telefone:");
 		String nroTelefone = leitor.nextLine();
-		
+
 		System.out.println("Digite o seu endereço:");
 		String endEstudante = leitor.nextLine();
+
+		System.out.println("Digite o número do cpf do estudante:");
+		String cpf = leitor.nextLine();
 		
-		System.out.println("Digite o nome do responsável do estudante:");
-		String nomeResponsavel = leitor.nextLine();
-		
-		var estudante = new Estudante(nomeEstudante, nroTelefone, endEstudante, nomeResponsavel);
-		
+		System.out.println("Digite o email do estudante:");
+		String email = leitor.nextLine();
+
+		var estudante = new Estudante(nomeEstudante, nroTelefone, endEstudante, cpf, email);
+
 		var cadastro = new CadastroDeEstudante();
-		
+
 		try {
-		cadastro.cadastrar(estudante);
-		}catch (IllegalArgumentException e) {
-			System.out.println("Erro ao cadastrar estudante: " +e.getMessage());
-		}
- 			
+			cadastro.cadastrar(estudante);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Erro ao cadastrar estudante: " + e.getMessage());
 		}
 
-	
-	private static void listarTurmas(Path arquivo) throws IOException{
+	}
+
+	private static void listarTurmas(Path arquivo) throws IOException {
 		var linhas = Files.readAllLines(arquivo);
-				
-		for(var linha : linhas) {
+
+		for (var linha : linhas) {
 			var campos = linha.split(",");
 			System.out.println(campos[0] + " - " + campos[1] + " - " + campos[2]);
 		}
-			
-	}
-	
 
-	private static void listarEstudantes() throws IOException{
+	}
+
+	private static void listarEstudantes() throws IOException {
 		var cadastro = new CadastroDeEstudante();
 		var estudantesCadastrados = cadastro.listar();
-		for (var estudante:estudantesCadastrados) {
-			System.out.println(estudante.getNome() + " - " +estudante.getTelefone() + " - " +estudante.getEndereco() + " - " +estudante.getResponsavel());
+		for (var estudante : estudantesCadastrados) {
+			System.out.println(estudante.getNome() + " - " + estudante.getTelefone() + " - " + estudante.getEndereco()
+					+ " - " + estudante.getCpf()+ " - " + estudante.getEmail());
 		}
 
 	}
-	
-	
-	
+
 }

@@ -5,14 +5,16 @@ public class Estudante {
 		private String nome;
 		private String telefone;
 		private String endereco;
-		private String responsavel;
+		private String cpf;
+		private String email;
 		
 		
-		public Estudante(String nome, String telefone, String endereco, String responsavel) {
+		public Estudante(String nome, String telefone, String endereco, String cpf, String email) {
 			this.nome = nome;
 			this.telefone = telefone;
 			this.endereco = endereco;
-			this.responsavel = responsavel;
+			this.cpf = cpf;
+			this.email = email;
 		}
 
 
@@ -46,13 +48,21 @@ public class Estudante {
 		}
 
 
-		public String getResponsavel() {
-			return responsavel;
+		public String getCpf() {
+			return cpf;
 		}
 
 
-		public void setResponsavel(String responsavel) {
-			this.responsavel = responsavel;
+		public void setCpf(String cpf) {
+			this.cpf = cpf;
+		}	
+		
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
 		}	
 				
 }
