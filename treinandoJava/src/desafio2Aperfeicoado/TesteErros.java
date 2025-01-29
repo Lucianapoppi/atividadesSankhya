@@ -1,4 +1,4 @@
-package desafio2Aperfeicoado;
+/*package desafio2Aperfeicoado;
 import java.util.Scanner;
 
 public class TesteErros {
@@ -46,3 +46,4 @@ public class TesteErros {
 	}
 
 }
+*/
